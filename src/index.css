@@ -3,14 +3,14 @@
 @theme {
 
   /* defining color such that can change with theme */
-  --color-border = hsl(var(--border));
-  --color-background = hsl(var(--background));
-  --color-foreground = hsl(var(--foreground));
+  --color-border : hsl(var(--border));
+  --color-background : hsl(var(--background));
+  --color-foreground : hsl(var(--foreground));
 
-  --color-primary = hsl(var(--primary));
-  --color-primary-foreground = hsl(var(--primary-foreground));
+  --color-primary : hsl(var(--primary));
+  --color-primary-foreground : hsl(var(--primary-foreground));
 
-  --color-card = hsl(var(--card));
+  --color-card : hsl(var(--card));
 
   /* Animations */
   --animate-float : float 6s ease-in-out infinite;  /* for the floating effect on the main content hero section */
@@ -76,10 +76,10 @@
       --background: 210 40% 98%;
       --foreground: 222 47% 11%;
 
-      --primary: 250, 47%, 60%;
-      --primary-foreground: 210, 40%, 98%;
+      --primary: 250 47% 60%;
+      --primary-foreground: 210 40% 98%;
 
-      --card: 0, 0%, 100%;
+      --card: 0 0% 100%;
     }
 
     .dark {
@@ -87,8 +87,8 @@
       --background: 222 47% 4%;
       --foreground: 213 31% 91%;
 
-      --primary: 250, 65%, 65%;
-      --primary-foreground: 213, 31%, 91%;
+      --primary: 250 65% 65%;
+      --primary-foreground: 213 31% 91%;
 
       --card: 222 47% 8%;
     }
@@ -131,7 +131,7 @@
 
 @utility text-glow {
     @apply relative;
-    text-shadow : 0 0 10px rgba(167, 139, 255, 0.3), 
+    text-shadow : 0 0 10px rgba(167\,139\,255\,0.3), 
 }
 
 @utility card-hover {
@@ -147,18 +147,18 @@
 
 @utility cosmic-button{
     @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium
-           transition-all duration-300 hover:shadow-[0_0_10px_rgba(139, 92, 246, 0.5)]
+           transition-all duration-300 hover:shadow-[0_0_10px_rgba(139\,92,\246,\0.5)]
            hover:scale-105 active:scale-95;
 }
 
 @utility star{
     @apply absolute rounded-full bg-white;
-    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px 2px rgba(255\,255\,255\,0.4);
 }
 
 @utility meteor{
     @apply absolute bg-linear-to-r from-white via-white to-transparent rounded-full;
-    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px 5px rgba(255\,255\,255\,0.3);
 }
 
   /* Adding some basic styles to our root element */
