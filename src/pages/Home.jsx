@@ -1,3 +1,4 @@
+import { StarBackground } from "../components/StarBackground"
 import { ThemeToggle } from "../components/ThemeToggle"
 
 export const Home = () => {
@@ -8,7 +9,7 @@ export const Home = () => {
             <ThemeToggle />
 
             {/*baground effect of particles moving representing stars*/}
-
+            <StarBackground />
 
             {/* navbar */}
 
@@ -18,7 +19,7 @@ export const Home = () => {
 
             {/* Footer */}
             <h1>Welcome to My Portfolio</h1>
-            <p>This is the home page of my portfolio website.</p>
+            <p>Hello, This is the home page of my portfolio website.</p>
             <p>Here you can find information about my projects, skills, and experience.</p>
         </div>
     )
