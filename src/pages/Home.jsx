@@ -1,3 +1,4 @@
+import { Navbar } from "../components/Navbar"
 import { StarBackground } from "../components/StarBackground"
 import { ThemeToggle } from "../components/ThemeToggle"
 
@@ -12,15 +13,12 @@ export const Home = () => {
             <StarBackground />
 
             {/* navbar */}
-
+            <Navbar />
 
             {/* Main content: hero section-about section-skill section-projects and so on...*/}
 
 
             {/* Footer */}
-            <h1>Welcome to My Portfolio</h1>
-            <p>Hello, This is the home page of my portfolio website.</p>
-            <p>Here you can find information about my projects, skills, and experience.</p>
-        </div>
+            </div>
     )
 }

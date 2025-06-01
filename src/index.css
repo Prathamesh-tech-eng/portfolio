@@ -131,7 +131,7 @@
 
 @utility text-glow {
     @apply relative;
-    text-shadow : 0 0 10px rgba(167, 139, 255, 0.3), 
+    text-shadow: 0 0 6px rgba(167, 25, 255, 0.6), 0 0 12px rgba(167, 25, 255, 0.4);
 }
 
 @utility card-hover {
