@@ -15,11 +15,12 @@
   /* Animations */
   --animate-float : float 6s ease-in-out infinite;  /* for the floating effect on the main content hero section */
   --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;   /* for stars, will keep the background stars pulsating */
-  --animate-fade-in: fade-in 0.7s ease-out forwards;
-  --animate-fade-in-delay-1: fade in 0.7s ease-out 0.2s forwards;
-  --animate-fade-in-delay-2: fade in 0.7s ease-out 0.4s forwards;
-  --animate-fade-in-delay-3: fade in 0.7s ease-out 0.6s forwards;
-  --animate-fade-in-delay-4: fade in 0.7s ease-out 0.8s forwards;
+  --animate-fade-in: fade-in 1s ease-out forwards;
+  --animate-fade-in-delay-1: fade-in 1s ease-out 0.2s forwards;
+  --animate-fade-in-delay-2: fade-in 1s ease-out 0.4s forwards;
+  --animate-fade-in-delay-3: fade-in 1s ease-out 0.6s forwards;
+  --animate-fade-in-delay-4: fade-in 1s ease-out 0.8s forwards;
+  --animate-fade-in-delay-5: fade-in 1s ease-out 1s forwards;
   --animate-meteor: meteor 5s linear infinite;
 
     
@@ -147,7 +148,7 @@
 
 @utility cosmic-button{
     @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium
-           transition-all duration-300 hover:shadow-[0_0_10px_rgba(139,\92,\246,\0.5)]
+           transition-all duration-300 hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]
            hover:scale-105 active:scale-95;
 }
 
