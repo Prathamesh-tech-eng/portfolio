@@ -1,7 +1,7 @@
 import { Instagram, Linkedin, Mail, MapPin, Phone, Send, Twitch, Twitter } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "../hooks/use-toast";
-
+import { useEffect, useState } from "react";
 
 export const ContactSection = () => {
 
@@ -46,7 +46,7 @@ export const ContactSection = () => {
                                 <div>
                                     <h4> Email </h4>
                                     <a href= "mailto:chikkaliprathamesh3@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
-                                        chikkaliprathamesh3
+                                        chikkaliprathamesh3@gmail.com
                                     </a>
                                 </div>
                             </div>
