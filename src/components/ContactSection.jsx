@@ -1,28 +1,60 @@
 import { Instagram, Linkedin, Mail, MapPin, Phone, Send, Twitch, Twitter } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "../hooks/use-toast";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const ContactSection = () => {
 
-    const {toast} = useToast();
+    const { toast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
 
-    const handleSubmit = (e) => {
+    // If you want direct delivery instead of mailto, set VITE_CONTACT_ENDPOINT in your environment
+    const CONTACT_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT || '';
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
+        if (isSubmitting) return;
         setIsSubmitting(true);
 
-        setTimeout(() => {
-            toast({
-                title: "Message Sent",
-                description: "Thank you for reaching out! I'll get back to you soon.",
-                duration: 3000,
-                variant: "success",
-            });
+        // Basic validation
+        if (!name.trim() || !email.trim() || !message.trim()) {
+            toast({ title: 'Validation', description: 'Please fill all fields.', variant: 'destructive' });
             setIsSubmitting(false);
-        }, 1500);
-    }
+            return;
+        }
+
+        if (CONTACT_ENDPOINT) {
+            try {
+                const res = await fetch(CONTACT_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, message }),
+                });
+
+                if (res.ok) {
+                    toast({ title: 'Message Sent', description: "Thank you — I'll get back to you soon.", variant: 'success' });
+                    setName(''); setEmail(''); setMessage('');
+                } else {
+                    const text = await res.text();
+                    toast({ title: 'Send Failed', description: text || 'Server error', variant: 'destructive' });
+                }
+            } catch (err) {
+                toast({ title: 'Network Error', description: err?.message || 'Unable to send message', variant: 'destructive' });
+            } finally {
+                setIsSubmitting(false);
+            }
+        } else {
+            // Fallback: open user's mail client with prefilled fields
+            const subject = encodeURIComponent(`Contact from portfolio: ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+            window.location.href = `mailto:chikkaliprathamesh3@gmail.com?subject=${subject}&body=${body}`;
+            setIsSubmitting(false);
+            toast({ title: 'Opened Mail App', description: 'Your default mail client should open to send the message.', variant: 'default' });
+        }
+    };
 
     return(
         <section id="contact" className="py-24 px-4 sm:px-6 relative bg-secondary/30">
@@ -75,42 +107,65 @@ export const ContactSection = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="pt-8">
-                            <h4 className="font-medium mb-4"> Connect with me </h4>
-                            <div className="flex space-x-4 justify-center">
-                                <a target="_blank" href="https://www.linkedin.com/in/prathameshchikkali/">
-                                   <Linkedin /> 
-                                </a>
-                                 <a target="_blank" href="https://x.com/Prathamesh_C33">
-                                   <Twitter /> 
-                                </a>
-                                 <a target="_blank">
-                                   <Instagram /> 
-                                </a>
-                                 <a target="_blank">
-                                   <Twitch /> 
-                                </a>
-                            </div>
-                        </div>
+                                <div className="pt-8">
+                                     <h4 className="font-medium mb-4"> Connect with me </h4>
+                                     <div className="flex space-x-4 justify-center">
+                                          <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/prathameshchikkali/" aria-label="LinkedIn">
+                                              <Linkedin /> 
+                                          </a>
+                                            <a target="_blank" rel="noopener noreferrer" href="https://x.com/Prathamesh_C33" aria-label="X">
+                                              <Twitter /> 
+                                          </a>
+                                            <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/" aria-label="Instagram">
+                                              <Instagram /> 
+                                          </a>
+                                            <a target="_blank" rel="noopener noreferrer" href="https://www.twitch.tv/" aria-label="Twitch">
+                                              <Twitch /> 
+                                          </a>
+                                     </div>
+                                </div>
                     </div>
 
-                    <div className="bg-card rounded-lg p-8 shadow-xs" onSubmit={handleSubmit}>
+                    <div className="bg-card rounded-lg p-8 shadow-xs">
                         <h3 className="text-2xl font-semibold mb-6"> Send a Message </h3>
-                        <form className="space-y-6">
+                        <form className="space-y-6" onSubmit={handleSubmit}>
                             <div>
-                                <label htmlFor="name" className="bolck text-sm font-medium mb-2"> Your Name </label>
-                                <input type="text" id="name" name="name" required placeholder="   Prathamesh Chikkali..."
-                                className="w-full py-3 rounded-md bg-background border border-input focus:outline-hidden focus:ring-2 focus:ring-primary transition-colors"/>
+                                <label htmlFor="name" className="block text-sm font-medium mb-2"> Your Name </label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    required
+                                    placeholder="   Prathamesh Chikkali..."
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    className="w-full py-3 rounded-md bg-background border border-input focus:outline-hidden focus:ring-2 focus:ring-primary transition-colors"
+                                />
                             </div>
                             <div>
-                                <label htmlFor="email" className="bolck text-sm font-medium mb-2"> Your Email </label>
-                                <input type="email" id="email" name="email" required placeholder="   chikkaliprathamesh3@gmail.com..."
-                                className="w-full py-3 rounded-md bg-background border border-input focus:outline-hidden focus:ring-2 focus:ring-primary transition-colors"/>
+                                <label htmlFor="email" className="block text-sm font-medium mb-2"> Your Email </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    required
+                                    placeholder="   chikkaliprathamesh3@gmail.com..."
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="w-full py-3 rounded-md bg-background border border-input focus:outline-hidden focus:ring-2 focus:ring-primary transition-colors"
+                                />
                             </div>
                             <div>
-                                <label htmlFor="message" className="bolck text-sm font-medium mb-2"> Your Message </label>
-                                <textarea type="text" id="message" name="message" required placeholder="  Hello, I would like to talk about..."
-                                className="w-full py-3 rounded-md bg-background border border-input focus:outline-hidden focus:ring-2 focus:ring-primary transition-colors"/>
+                                <label htmlFor="message" className="block text-sm font-medium mb-2"> Your Message </label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    required
+                                    placeholder="  Hello, I would like to talk about..."
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
+                                    className="w-full py-3 rounded-md bg-background border border-input focus:outline-hidden focus:ring-2 focus:ring-primary transition-colors"
+                                />
                             </div>
                             <button type="submit"
                             disabled={isSubmitting}
@@ -119,6 +174,7 @@ export const ContactSection = () => {
                                 {isSubmitting ? "Sending..." : "Send Message"}
                                 <Send size={16}/>
                             </button>
+                            <p className="text-xs text-muted-foreground mt-2">{CONTACT_ENDPOINT ? 'Messages are sent directly via the configured endpoint.' : 'This will open your default mail client to send the message (no backend configured).'} </p>
                         </form>
                     </div>
 

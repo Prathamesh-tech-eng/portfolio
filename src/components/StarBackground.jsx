@@ -1,5 +1,4 @@
 
-import { Key } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 
 export const StarBackground = () => {
@@ -9,6 +8,7 @@ export const StarBackground = () => {
 
     const [stars, setStars] = useState([])
     const [meteors, setMeteors] = useState([]);
+    const [mouse, setMouse] = useState({ x: 50, y: 50 });
 
     useEffect(() => {
         generateStars();
@@ -18,15 +18,28 @@ export const StarBackground = () => {
             generateStars();
         };
 
+        // lightweight mouse parallax (only on medium+ screens)
+        let rafId = null;
+        const handleMouse = (ev) => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+                setMouse({ x: (ev.clientX / window.innerWidth) * 100, y: (ev.clientY / window.innerHeight) * 100 });
+            });
+        };
+
         window.addEventListener('resize', handleResize);
+        if (window.innerWidth >= 768) window.addEventListener('mousemove', handleMouse);
         return () => {
             window.removeEventListener('resize', handleResize);
+            if (window.innerWidth >= 768) window.removeEventListener('mousemove', handleMouse);
+            if (rafId) cancelAnimationFrame(rafId);
         };
     }, []);
 
     const generateStars = () => {
+        // reduce star density slightly for better performance on large screens
         const numberOfstars = Math.floor(
-            (window.innerWidth * window.innerHeight) / 10000
+            (window.innerWidth * window.innerHeight) / 14000
         );
         const newStars = [];
 
@@ -44,7 +57,7 @@ export const StarBackground = () => {
     };
 
     const generateMeteors = () => {
-        const numberOfMeteors  = 4
+        const numberOfMeteors  = Math.max(2, Math.floor(window.innerWidth / 600));
         const newMeteors = [];
 
         for (let i = 0; i < numberOfMeteors; i++) {
@@ -53,7 +66,7 @@ export const StarBackground = () => {
                 size: Math.random() * 2 + 1, // Random size between 1 and 3
                 x: Math.random() * 100, // Random x position in percentage
                 y: Math.random() * 20, // Random y position in percentage (top of the screen)
-                delay: Math.random()*50, 
+                delay: Math.random()*30, 
                 animationDuration: Math.random() * 3 + 3 // Random duration between 2 and 6 seconds
             });
         }
@@ -61,7 +74,11 @@ export const StarBackground = () => {
     };
 
     return <div className='fixed inset-0 overflow-hidden pointer-events-none z-0'>
-        {stars.map((star) => (
+        {stars.map((star) => {
+            // small parallax offset based on mouse (in px)
+            const offsetX = ((mouse.x - 50) / 50) * (star.size * 0.8);
+            const offsetY = ((mouse.y - 50) / 50) * (star.size * 0.6);
+            return (
             <div key={star.id} className='star animate-pulse-subtle' style={
                 {
                     width: star.size + 'px', 
@@ -70,19 +87,21 @@ export const StarBackground = () => {
                     top: star.y + '%',
                     opacity: star.opacity,
                     animationDuration: star.animationDuration + 's',
+                    transform: `translate(${offsetX}px, ${offsetY}px)`
                 }
             }></div>
-        ))}
+            )
+        })}
 
-        {meteors.map((meteors) => (
-            <div key={meteors.id} className='meteor animate-meteor' style={
+        {meteors.map((m) => (
+            <div key={m.id} className='meteor animate-meteor' style={
                 {
-                    width: meteors.size*17 + 'px', 
-                    height: meteors.size + 'px',
-                    left: meteors.x + '%',
-                    top: meteors.y + '%',
-                    animationDelay: meteors.delay,
-                    animationDuration: meteors.animationDuration + 's',
+                    width: m.size * 17 + 'px', 
+                    height: m.size + 'px',
+                    left: m.x + '%',
+                    top: m.y + '%',
+                    animationDelay: (m.delay || 0) + 's',
+                    animationDuration: m.animationDuration + 's',
                 }
             }></div>
         ))}

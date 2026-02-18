@@ -1,4 +1,4 @@
-import ArrowDown from 'lucide-react/dist/esm/icons/arrow-down';
+import { ArrowDown } from 'lucide-react';
 
 export const HeroSection = () => {
     return <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center px-4">
@@ -11,7 +11,7 @@ export const HeroSection = () => {
                 <span className="text-gradient ml-2 opacity-0 animate-fade-in-delay-3"> Chikkali</span>
                 </h1>
 
-                <p className="text-lg md:text-xl text-muted-foreground opacity-0 max-2-2xl mx-auto animate-fade-in-delay-4">
+                <p className="text-lg md:text-xl text-muted-foreground opacity-0 max-w-2xl mx-auto animate-fade-in-delay-4">
                      I’m a Computer Science student with a passion for AI and web development.
                      <br />
                      <span className="text-primary"> I build intelligent systems and seamless digital experiences. </span>
@@ -20,10 +20,8 @@ export const HeroSection = () => {
                      I'm always eager to learn, experiment, and turn ideas into impactful solutions.
                 </p>
             <div className="pt-4 opacity-0 animate-fade-in-delay-5">
-                <a>
-                    <button href="#projects" className="cosmic-button">
-                        View My Work
-                    </button>
+                <a href="#projects" className="cosmic-button inline-block">
+                    View My Work
                 </a>
             </div>
             </div>

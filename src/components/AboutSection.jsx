@@ -15,25 +15,99 @@ export const AboutSection = () => {
                     <div className="space-y-6">
 
                         <h3 className="text-2xl font-semibold">
-                            Passionate AI and web developer
+                            AI & Web Developer — Student, Problem Solver
                         </h3>
 
                         <p className="text-muted-foreground">
-                            I’m a Computer Science student with a passion for AI and web development.
-                            I enjoy working on AI models that solve real-world problems and developing websites with intuitive, responsive user interfaces.
-                            I'm always eager to learn, experiment, and turn ideas into impactful solutions.
-                        </p>
-                        <p className="text-muted-foreground">
-                            My journey in tech has been driven by curiosity and a desire to create. 
-                            From building my first website to developing AI applications, I thrive on challenges that push my boundaries.
+                            I'm a Computer Science student focused on building production-ready web apps and practical AI systems. I combine strong fundamentals in algorithms and systems with hands-on experience in modern web frameworks and ML toolkits to deliver performant, maintainable solutions.
                         </p>
 
+                        <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-muted-foreground">
+                            <li>
+                                <strong>Core:</strong>
+                                <div className="inline-flex flex-wrap gap-2 ml-2">
+                                    {['DSA','System Design','REST APIs'].map((c) => (
+                                        <button
+                                            key={c}
+                                            onClick={() => {
+                                                window.dispatchEvent(new CustomEvent('filter-skills', { detail: { category: 'Programming' } }));
+                                                const el = document.getElementById('skills');
+                                                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                            }}
+                                            className="text-xs px-2 py-1 rounded-md bg-secondary/20 hover:scale-105 transform transition-all duration-150"
+                                            aria-label={`Show ${c} skills`}
+                                        >{c}</button>
+                                    ))}
+                                </div>
+                            </li>
+                            <li>
+                                <strong>Frontend:</strong>
+                                <div className="inline-flex flex-wrap gap-2 ml-2">
+                                    {['React','Tailwind','TypeScript'].map((c) => (
+                                        <button
+                                            key={c}
+                                            onClick={() => {
+                                                window.dispatchEvent(new CustomEvent('filter-skills', { detail: { category: 'Front-End' } }));
+                                                const el = document.getElementById('skills');
+                                                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                            }}
+                                            className="text-xs px-2 py-1 rounded-md bg-secondary/20 hover:scale-105 transform transition-all duration-150"
+                                            aria-label={`Show ${c} skills`}
+                                        >{c}</button>
+                                    ))}
+                                </div>
+                            </li>
+                            <li>
+                                <strong>Backend:</strong>
+                                <div className="inline-flex flex-wrap gap-2 ml-2">
+                                    {['Node.js','Spring Boot','FastAPI'].map((c) => (
+                                        <button
+                                            key={c}
+                                            onClick={() => {
+                                                window.dispatchEvent(new CustomEvent('filter-skills', { detail: { category: 'Backend' } }));
+                                                const el = document.getElementById('skills');
+                                                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                            }}
+                                            className="text-xs px-2 py-1 rounded-md bg-secondary/20 hover:scale-105 transform transition-all duration-150"
+                                            aria-label={`Show ${c} skills`}
+                                        >{c}</button>
+                                    ))}
+                                </div>
+                            </li>
+                            <li>
+                                <strong>AI/ML:</strong>
+                                <div className="inline-flex flex-wrap gap-2 ml-2">
+                                    {['TensorFlow','PyTorch','BERT'].map((c) => (
+                                        <button
+                                            key={c}
+                                            onClick={() => {
+                                                window.dispatchEvent(new CustomEvent('filter-skills', { detail: { category: 'AI/ML' } }));
+                                                const el = document.getElementById('skills');
+                                                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                            }}
+                                            className="text-xs px-2 py-1 rounded-md bg-secondary/20 hover:scale-105 transform transition-all duration-150"
+                                            aria-label={`Show ${c} skills`}
+                                        >{c}</button>
+                                    ))}
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div className="mt-4 text-left">
+                            <h4 className="font-semibold text-lg">Certifications & Highlights</h4>
+                            <ul className="text-muted-foreground list-disc list-inside">
+                                <li>5-Star HackerRank (Java & Python); Level 4 CodeChef</li>
+                                <li>NPTEL — Data Structures & Algorithms (Elite/Silver)</li>
+                                <li>1st Place — Samarthana Hackathon (National)</li>
+                            </ul>
+                        </div>
+
                         <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-                            <a href="#contact" className="cosmic-button">
+                            <a href="#contact" aria-label="Get in touch" className="cosmic-button">
                                 Get in Touch
                             </a>
 
-                             <a href="#contact" className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300">
+                             <a href="/resume.pdf" download aria-label="Download CV" className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300">
                                 Download CV
                             </a>
                         </div>
