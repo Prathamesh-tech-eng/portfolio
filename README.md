@@ -1,52 +1,101 @@
 ```markdown
 My portfolio link  : https://portfolio-a46y-git-main-prathameshs-projects-2a6b51c8.vercel.app
 
-# Portfolio — Master Skills & Project Highlights
+# Portfolio (Personal Website)
 
-## 1. Master Skills List (Categorized)
+This repository contains a React + Vite portfolio site showcasing projects, skills, and highlights. It uses Tailwind CSS for styling and Lucide icons.
 
-- **Programming:** Java (5-Star HackerRank), Python (NPTEL Certified), C++, JavaScript (ES6+), SQL, Bash Scripting.
-- **Front-End:** React.js, Tailwind CSS, Redux Toolkit, TypeScript, Framer Motion, HTML5, CSS3, Figma.
-- **Backend:** Node.js (Express), Spring Boot (Java), FastAPI (Python), RESTful APIs, JWT Auth.
-- **Databases / Caching:** PostgreSQL, MySQL, MongoDB, Redis (In-memory Caching).
-- **AI / ML / Data:** TensorFlow, PyTorch, Scikit-Learn, MediaPipe, OpenCV, Pandas, NumPy, BERT (Transformers).
-- **Cloud & DevOps:** AWS (EC2, S3, RDS), Docker, Kubernetes (K8s), Jenkins, GitHub Actions, Terraform.
-- **Systems & Core:** Data Structures & Algorithms (DSA), Operating Systems (OS), DBMS (ACID, Indexing), Networking.
+Live demo (your Vercel deployment): https://portfolio-a46y-git-main-prathameshs-projects-2a6b51c8.vercel.app
 
-## 2. Consolidated Project Portfolio (Selected)
+## Quick Start — Local Development
 
-### Backend & Systems Focus
-- **LogStream:** Distributed logging using Kafka and Redis for high-concurrency ingestion.
-- **Vanguard:** Secure API Gateway with Token Bucket rate limiting and JWT auth.
-- **FileSystem-Sim:** Low-level C++ project managing metadata and LRU caching (demonstrates OS knowledge).
+Prerequisites: Node.js 18+ and npm.
 
-### Front-End & UI Focus
-- **Lumina:** High-performance React financial dashboard with complex state and animations.
-- **Aura Design System:** Reusable component library built with TypeScript and Storybook.
+1. Install dependencies
 
-### AI & Data Science Focus
-- **SignSync:** Real-time sign language recognition using MediaPipe and LSTMs.
-- **InsightStream:** NLP news aggregator using BERT to profile political bias and sentiment.
-- **Fake News Detector:** Robust classifier using Random Forest and extensive feature engineering.
+```bash
+npm install
+```
 
-### Cloud & DevOps Focus
-- **SolarCloud:** Hybrid cloud architecture for research data, optimizing S3 storage costs.
-- **Nexus:** Full CI/CD pipeline (Jenkins/Docker) with Blue-Green deployment strategy.
-- **KubeScale:** Elastic deployment of web apps using Kubernetes HPA (Horizontal Pod Autoscaling).
+2. Start dev server
 
-### Full-Stack & Generalist
-- **Banking Web App:** End-to-end FinTech app with SQL, Node.js, and an integrated chatbot.
+```bash
+npm run dev
+```
 
-## 3. Key Achievements & Certifications
+3. Build for production
 
-- **1st Place Winner:** Samarthana Hackathon (National Level).
-- **Competitive Programming:** Level 4 CodeChef; 5-Star HackerRank (Java & Python).
-- **NPTEL:** Data Structures & Algorithms in Python (Elite/Silver Medal).
-- **Industry Certs:** Full-Stack Development (EduSkills).
-- **Institutional:** NVIDIA Centre of Excellence (Hardware/GPU Experience).
+```bash
+npm run build
+```
 
----
+4. Preview built site
 
-This README highlights the core skills, representative projects, and notable achievements. For detailed project writeups, demos and code links, see the Projects section of the site or the `src/components/ProjectsSection.jsx` file.
+```bash
+npm run preview
+```
+
+## Project Structure (key files)
+
+- `src/` — React source files
+- `src/components/` — UI components (About, Projects, Navbar, etc.)
+- `public/` — static assets; your resume PDFs live under `public/resumes/`
+- `package.json` — scripts and dependencies
+
+## Resumes
+
+Drop PDF files into `public/resumes/`. They will be served at `/resumes/<filename>.pdf` from the built site. The About section includes a resume selector that reads files from this folder.
+
+Example filenames currently present:
+
+- `public/resumes/Resume_FrontEnd_PrathameshChikkali.pdf`
+- `public/resumes/Resume_BackEnd_PrathameshChikkali.pdf`
+- `public/resumes/Resume_DataScience_PrathameshChikkali.pdf`
+- `public/resumes/Resume_DevOps_PrathameshChikkali.pdf`
+- `public/resumes/Resume_SoftwareDevelopment_PrathameshChikkali.pdf`
+
+To add/change resumes: add the file to `public/resumes/` and (optionally) update `src/components/ResumeSelector.jsx` if you want a custom label.
+
+## Linting
+
+```bash
+npm run lint
+```
+
+## Deployment to Vercel
+
+Vercel automatically deploys from your repository when connected. To trigger a redeploy:
+
+- Push changes to the branch Vercel is configured to watch (often `main`):
+
+```bash
+git add .
+git commit -m "Deploy: update About section and resume selector"
+git push origin main
+```
+
+- Or trigger a redeploy from the Vercel dashboard.
+
+Manual CLI deploy (use if you prefer):
+
+```bash
+npm i -g vercel
+vercel --prod
+```
+
+If you want automated deploys via GitHub Actions, I can add a workflow that runs `npm ci`, `npm run build`, and deploys with the Vercel Action using a `VERCEL_TOKEN` secret.
+
+## Recent Changes (high level)
+
+- Refactored `AboutSection.jsx` to match card layout and top-align columns.
+- Added `src/components/ResumeSelector.jsx` and integrated a selectable Resume Download/Preview UI.
+- Moved Certifications into a card aligned with the right column and ensured equal column heights using Tailwind `items-stretch` and `h-full`.
+- Fixed overflow/shrink issues by adding `min-w-0` to flex containers and limiting selector width.
+
+## Troubleshooting
+
+- If assets fail to load after build, ensure paths in `public/` are correct and not referenced with `.` relative paths.
+- If Preview opens a blank page, check devtools for 404 requests to `/resumes/<name>.pdf` and confirm filename case matches.
+
 
 ``` 
