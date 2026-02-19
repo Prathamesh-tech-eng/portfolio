@@ -1,11 +1,10 @@
-```markdown
+
 My portfolio link  : https://portfolio-a46y-git-main-prathameshs-projects-2a6b51c8.vercel.app
 
 # Portfolio (Personal Website)
 
 This repository contains a React + Vite portfolio site showcasing projects, skills, and highlights. It uses Tailwind CSS for styling and Lucide icons.
 
-Live demo (your Vercel deployment): https://portfolio-a46y-git-main-prathameshs-projects-2a6b51c8.vercel.app
 
 ## Quick Start — Local Development
 
